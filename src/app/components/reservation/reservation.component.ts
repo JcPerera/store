@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker'
 
 
 @Component({
@@ -8,14 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationComponent implements OnInit {
 
-  minDate = new Date(2017, 5, 10);
-  maxDate = new Date(2018, 9, 15);
+  minDate: Date;
+  maxDate: Date;
   mytime: Date = new Date();
- 
-  bsValue: Date = new Date();
-  bsRangeValue: any ;
 
-  constructor() { 
+  bsValue: Date = new Date();
+  bsRangeValue: any;
+  count: any;
+
+  colorTheme = 'theme-red';
+  
+   bsConfig: Partial<BsDatepickerConfig>;
+
+  constructor() {
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() - 1);
+    this.maxDate.setDate(this.maxDate.getDate() + 30);
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
   }
 
 
@@ -23,5 +34,5 @@ export class ReservationComponent implements OnInit {
 
   }
 
- 
+
 }

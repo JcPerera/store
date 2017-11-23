@@ -1,0 +1,18 @@
+.imageflow {
+    width: 100%;
+    min-height: 800px;
+    border: 0px;
+    background-image: url('../../../assets/wine.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.container{
+    padding-top: 80px;
+}
+
+label{
+    color: red;
+}

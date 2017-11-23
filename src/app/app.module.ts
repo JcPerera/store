@@ -19,6 +19,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +41,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'reservations', component: ReservationComponent },
+      { path: 'login/register', component: RegisterComponent },      
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'online-orders', component: OnlineOrdersComponent }
     ]),
   ],
