@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthUserService } from "./services/auth-user.service";
+import { HttpModule } from '@angular/http';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 
@@ -18,8 +21,7 @@ import { InformationComponent } from './components/information/information.compo
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
-
-
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,18 +37,20 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,   
+    AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
     NgbModule.forRoot(),
     TimepickerModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'reservations', component: ReservationComponent },
-      { path: 'login/register', component: RegisterComponent },      
+      { path: 'login/register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
       { path: 'online-orders', component: OnlineOrdersComponent }
     ]),
   ],
-  providers: [],
+  providers: [AuthUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

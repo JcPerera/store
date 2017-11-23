@@ -1,63 +1,78 @@
 <div class="container">
-
+    <alert *ngIf="sccuess" type="success" dismissOnTimeout="5000">
+        <strong>Well done!</strong> You successfully read this important alert message.
+      </alert>
   <div class="row">
-    <div class="col">
-
+    <div class="col-md-2">
     </div>
-    <div class="col">
+    <div class="col-md-5">
       <form #f="ngForm">
+
         <div class="form-group">
-          <label for="">Name</label>
+          <label>Name</label>
           <input #name="ngModel" name="name" [(ngModel)]="user.name" type="text" class="form-control" placeholder="Name" required>
-          <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
-            <div *ngIf="name.errors.required">Name is required.</div>
-          </div>
+
         </div>
+
         <div class="form-group">
           <label for="">Username</label>
           <input #username="ngModel" name="username" [(ngModel)]="user.username" type="text" class="form-control" placeholder="Username"
             required>
-          <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
-            <div *ngIf="username.errors.required">Username required.</div>
-          </div>
         </div>
+
         <div class="form-group">
           <label for="">Password</label>
           <input #password="ngModel" name="password" [(ngModel)]="user.password" type="password" class="form-control" placeholder="Password"
             required>
-          <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
-            <div *ngIf="password.errors.required">Password is Required.</div>
-          </div>
+
         </div>
-        <div class="form-group">
-          <label for="">Re-Password</label>
-          <input #repassword="ngModel" name="repassword" [(ngModel)]="user.repassword" type="password" class="form-control" placeholder="Re-Password"
-            required>
-          <div class="alert alert-danger" *ngIf="repassword.touched && repassword.invalid && repassword == password">
-            <div *ngIf="repassword.errors.required">Re-Password is Required.</div>
-            
-          </div>
-        </div>
+
         <div class="form-group">
           <label for="">E-mail Address</label>
-          <input #email="ngModel" name="email" [(ngModel)]="user.email" type="email" class="form-control" placeholder="E-mail Address"
+          <input #email="ngModel"  name="email" [(ngModel)]="user.email" type="email" class="form-control" placeholder="E-mail Address"
             required>
-          <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
-            <div *ngIf="email.errors.required">E-mail is Required.</div>
-          </div>
+
         </div>
+
         <div class="form-group">
           <label for="">Mobile No</label>
-          <input #mobile="ngModel" name="mobile" [(ngModel)]="user.mobile" type="text" class="form-control" placeholder="Mobile No"
+          <input #mobile="ngModel" name="mobile"  [(ngModel)]="user.mobile" type="text" class="form-control" placeholder="Mobile No"
             required>
-          <div class="alert alert-danger" *ngIf="mobile.touched && mobile.invalid">
-            <div *ngIf="mobile.errors.required">Mobile Number is required.</div>
-          </div>
+
         </div>
-        <button [disabled]="!f.valid" (click)="regiter()" class="btn btn-primary">Place Order</button>
+
+        <button [disabled]="!f.valid" (click)="registerUser()" class="btn btn-primary">Register</button>
       </form>
     </div>
-    <div class="col"></div>
+    <div class="col-md-5">
+      <label></label>
+      <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+        <div *ngIf="name.errors.required">Name is required.</div>
+      </div>
+
+      <label></label>
+      <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+        <div *ngIf="username.errors.required">Username required.</div>
+      </div>
+
+      <label></label>
+      <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+        <div *ngIf="password.errors.required">Password is Required.</div>
+      </div>
+
+      <label></label>
+      <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+        <div *ngIf="email.errors.required">E-mail is Required.</div>
+      </div>
+
+      <label></label>
+      <div class="alert alert-danger" *ngIf="mobile.touched && mobile.invalid">
+        <div *ngIf="mobile.errors.required">Mobile Number is required.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-2">
   </div>
 
 </div>

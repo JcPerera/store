@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./online-orders.component.css']
 })
 export class OnlineOrdersComponent implements OnInit {
-
+  category : any;
+  categories$
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  ok(){
+
   }
 
 }

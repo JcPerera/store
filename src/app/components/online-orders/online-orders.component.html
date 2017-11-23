@@ -1,3 +1,39 @@
-<p>
-  online-orders works!
-</p>
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+      <div class="sticky-top">
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">All Categories</a>
+            
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">Breakfast</a>
+            
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">Lunch</a>
+            
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">Dinner</a>
+            
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">Bevarages</a>
+            
+            <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/">Appertisers</a>
+           
+      
+          </div>
+        </div>
+  </div>
+  <div class="col-md-9">
+      <div class="card">
+          <!--<img *ngIf="product.imageUrl" class="card-img-top" src="assets/dish.jpg" alt="hi"> -->
+          <div class="card-body">
+            <h4 class="card-title">Title</h4>
+            <p class="card-text">Price</p>
+          </div>
+          <div class="card-footer">
+            <button
+              (click)="ok()"
+              class="btn btn-secondary btn-block">Add to Cart</button>
+            
+          </div>
+        </div>    
+        
+  </div>
+</div>
+</div>
