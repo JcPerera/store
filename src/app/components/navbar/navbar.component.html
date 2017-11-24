@@ -7,22 +7,21 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a class="nav-link" routerLink="reservations">Reservations</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a class="nav-link" routerLink="online-orders">Online Orders</a>
       </li>
-      <li class="nav-item navbar-right">
-        <a class="nav-link" routerLink="login">Login</a>
+      <li class="nav-item ">
+        <a *ngIf="!authService.loggedIn()" class="nav-link" routerLink="login">Login</a>
       </li>
-      <li ngbDropdown class="nav-item dropdown show">
+      <li *ngIf="authService.loggedIn()" ngbDropdown class="nav-item dropdown show">
         <a ngbDropdownToggle class=" dropdown-toggle nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">User</a>
         <div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
-          <a class="dropdown-item" routerLink="">My Reservations</a>
-          <a class="dropdown-item" routerLink="">My Orders</a>
-          <a class="dropdown-item" (click)="onLogout()" href="#" >Log Out</a>
+          <a class="dropdown-item" routerLink="profile">My profiel</a>
+          <a class="dropdown-item" (click)="onLogout()" href="#">Log Out</a>
         </div>
       </li>
     </ul>
