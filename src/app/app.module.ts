@@ -10,7 +10,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 import { AuthUserService } from "./services/auth-user.service";
 import { AuthguardsService } from "./services/authguards.service";
-
+import { ProductService } from "./services/product.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -78,7 +78,7 @@ import { SlideShowComponent } from './components/slide-show/slide-show.component
       }
     ]),
   ],
-  providers: [AuthUserService, AuthguardsService],
+  providers: [AuthUserService, AuthguardsService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,32 +3,33 @@
     <div class="col-md-3">
       <div class="sticky-top">
         <div class="list-group">
-          <a class="list-group-item list-group-item-action" routerLink="/">All Categories</a>
-          <a class="list-group-item list-group-item-action" routerLink="/">Breakfast</a>
-          <a class="list-group-item list-group-item-action" routerLink="/">Lunch</a>
-          <a class="list-group-item list-group-item-action" routerLink="/">Dinner</a>
-          <a class="list-group-item list-group-item-action" routerLink="/">Bevarages</a>
-          <a class="list-group-item list-group-item-action" routerLink="/">Appertisers</a>
+          <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/online-orders">All Categories</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'breakfast'" routerLink="/online-orders" [queryParams]="{ category: 'breakfast'}">Breakfast</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'lunch'" routerLink="/online-orders" [queryParams]="{ category: 'lunch'}">Lunch</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'dinner'" routerLink="/online-orders" [queryParams]="{ category: 'dinner'}">Dinner</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'beverage'" routerLink="/online-orders" [queryParams]="{ category: 'beverage'}">Bevarages</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'appertisers'" routerLink="/online-orders" [queryParams]="{ category: 'appertisers'}">Appertisers</a>
         </div>
       </div>
     </div>
     <div class="col-md-9">
       <div class="row">
-          <ng-container *ngFor="let p of cards">
-        <div class="col">
-          <div class="card">
-            <img class="card-img-top" src="assets/dish.jpg" alt="Image Not Available" width="200px">
-            <div class="card-body">
-              <h4 class="card-title">Title</h4>
-              <p class="card-text">Price</p>
-            </div>
-            <div class="card-footer">
-              <button (click)="ok()" class="btn btn-secondary btn-block">Add to Cart</button>
+        <ng-container *ngFor="let p of filteredProducts  ; let i = index">
+          <div class="col" style="width:15rem;">
+            <div class="card">
+              <img class="card-img-top" src="{{p.image}}" alt="Image Not Available" width="200px">
+              <div class="card-body">
+                <h4 class="card-title">{{p.name}}</h4>
+                <p class="card-text">Rs.{{p.price}}</p>
+              </div>
+              <div class="card-footer">
+                <button (click)="ok()" class="btn btn-secondary btn-block">Add to Cart</button>
 
+              </div>
             </div>
           </div>
-        </div>
-      </ng-container>
+          <div *ngIf="(i +1 )%3 ===0" class="w-100"></div>
+        </ng-container>
 
       </div>
     </div>
