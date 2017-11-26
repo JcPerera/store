@@ -28,17 +28,13 @@ export class OnlineOrdersComponent implements OnInit {
           this.products.filter(p => p.category === this.category) :
           this.products;
       });
-
-
-
-
-
   }
+
+  addToCart(){}
 
   ngOnInit() {
 
   }
-
 
 
 }
