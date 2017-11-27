@@ -22,7 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { SlideShowComponent } from './components/slide-show/slide-show.component';
-
+import { ReservationService } from "./services/reservation.service";
 
 
 
@@ -78,7 +78,12 @@ import { SlideShowComponent } from './components/slide-show/slide-show.component
       }
     ]),
   ],
-  providers: [AuthUserService, AuthguardsService, ProductService],
+  providers: [
+    AuthUserService, 
+    AuthguardsService, 
+    ProductService,
+    ReservationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

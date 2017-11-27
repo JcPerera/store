@@ -45,6 +45,11 @@ export class AuthUserService {
     this.authToken = token;
   }
 
+  loadUser(){
+    const user = localStorage.getItem('user');
+    return user;
+  }
+
   loggedIn() {
     return tokenNotExpired('id_token');
   }
