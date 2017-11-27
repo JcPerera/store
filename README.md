@@ -1,8 +1,8 @@
 # Included
-Passport Js to Authenticate Users
-SMS notifications
-Email notifications - under development
-Payment gateway - under development
+Passport Js to Authenticate Users,
+ SMS notifications,
+ Email notifications - under development,
+ Payment gateway - under development
 
 
 # Store
