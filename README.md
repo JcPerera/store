@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 # Store
+=======
+# Included
+Passport Js to Authenticate Users,
+ SMS notifications,
+ Email notifications - under development,
+ Payment gateway - under development
+
+
+# Store
+This is a front-end for a Online Restaurant
+>>>>>>> origin/master
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
 ## Development server
