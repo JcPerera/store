@@ -23,6 +23,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { SlideShowComponent } from './components/slide-show/slide-show.component';
 import { ReservationService } from "./services/reservation.service";
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 
@@ -39,6 +40,7 @@ import { ReservationService } from "./services/reservation.service";
     OnlineOrdersComponent,
     InformationComponent,
     ProfileComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,11 @@ import { ReservationService } from "./services/reservation.service";
       {
         path: 'online-orders',
         component: OnlineOrdersComponent,
+        canActivate: [AuthguardsService]
+      },
+      {
+        path: 'shopping-cart',
+        component: ShoppingCartComponent,
         canActivate: [AuthguardsService]
       }
     ]),

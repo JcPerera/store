@@ -14,12 +14,19 @@ export class OnlineOrdersComponent implements OnInit {
   products = [];
   filteredProducts = [];
   constructor(
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
     private auth: AuthUserService,
     private productService: ProductService) {
+      this.loadProducts();
+      this.productService.save();
+  }
+
+  addToCart() { }
+
+  loadProducts() {
     this.productService.getProducts().switchMap(products => {
       this.products = products;
-      return route.queryParamMap;
+      return this.route.queryParamMap;
     })
       .subscribe(params => {
         this.category = params.get('category');
@@ -30,7 +37,9 @@ export class OnlineOrdersComponent implements OnInit {
       });
   }
 
-  addToCart(){}
+  createOrGetCart(){
+    
+  }
 
   ngOnInit() {
 
