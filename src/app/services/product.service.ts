@@ -16,7 +16,7 @@ export class ProductService {
       .map(res => res.json());
   }
 
-  gerCart() {
+  getCartId() {
     this.user = JSON.parse(this.auth.loadUser());
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -24,16 +24,31 @@ export class ProductService {
       .map(res => res.json());
   }
 
+  getCartProducts() {
+    this.user = JSON.parse(this.auth.loadUser());
+    let headers = new Headers();
+    return this.http.get('http://localhost:8080/cart/' + this.cartId, { headers: headers })
+      .map(res => res.json());
+  }
+
   addProdToCart(item) {
     this.user = JSON.parse(this.auth.loadUser());
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.put('http://localhost:8080/cart/'+this.cartId, item, { headers: headers })
+    return this.http.put('http://localhost:8080/cart/' + this.cartId, item, { headers: headers })
       .map(res => res.json());
   }
 
-  save() {
-    this.gerCart().subscribe(data => {
+  UpdateFullCart(item) {
+    this.user = JSON.parse(this.auth.loadUser());
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/cart/' + this.cartId, item, { headers: headers })
+      .map(res => res.json());
+  }
+
+  saveCartId() {
+    this.getCartId().subscribe(data => {
       if (data) {
         this.storeCart(data._id);
       }
@@ -46,4 +61,7 @@ export class ProductService {
     localStorage.setItem('cart_id', cartId);
     this.cartId = cartId;
   }
+
+  
+
 }

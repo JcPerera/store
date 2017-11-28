@@ -8,11 +8,15 @@
           <a class="list-group-item list-group-item-action" [class.active]="category === 'lunch'" routerLink="/online-orders" [queryParams]="{ category: 'lunch'}">Lunch</a>
           <a class="list-group-item list-group-item-action" [class.active]="category === 'dinner'" routerLink="/online-orders" [queryParams]="{ category: 'dinner'}">Dinner</a>
           <a class="list-group-item list-group-item-action" [class.active]="category === 'beverage'" routerLink="/online-orders" [queryParams]="{ category: 'beverage'}">Bevarages</a>
-          <a class="list-group-item list-group-item-action" [class.active]="category === 'appertisers'" routerLink="/online-orders" [queryParams]="{ category: 'appertisers'}">Appertisers</a>
+          <a class="list-group-item list-group-item-action" [class.active]="category === 'appertisers'" routerLink="/online-orders"
+            [queryParams]="{ category: 'appertisers'}">Appertisers</a>
         </div>
       </div>
     </div>
     <div class="col-md-9">
+      <div *ngFor="let alert of alerts">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+      </div>
       <div class="row">
         <ng-container *ngFor="let p of filteredProducts  ; let i = index">
           <div class="col" style="width:15rem;">
@@ -23,8 +27,7 @@
                 <p class="card-text">Rs.{{p.price}}</p>
               </div>
               <div class="card-footer">
-                <button (click)="addToCart(p)" class="btn btn-secondary btn-block">Add to Cart</button>
-
+                <button (click)="addToCart(p)" class="btn btn-primary btn-block">Add to Cart</button>
               </div>
             </div>
           </div>

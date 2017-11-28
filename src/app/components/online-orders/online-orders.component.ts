@@ -3,6 +3,7 @@ import { AuthUserService } from "../../services/auth-user.service";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from '@angular/router'
 import 'rxjs/add/operator/switchMap';
+import { Input } from '@angular/core/src/metadata/directives';
 
 @Component({
   selector: 'app-online-orders',
@@ -13,28 +14,88 @@ export class OnlineOrdersComponent implements OnInit {
   category: any;
   products = [];
   filteredProducts = [];
+  Newcart = {
+    mobile:"",
+    username:"",
+    cart: {
+      products: [{
+        name: ""
+      }]
+    }
+
+  }
+  alerts = [];
   constructor(
     private route: ActivatedRoute,
     private auth: AuthUserService,
     private productService: ProductService) {
     this.loadProducts();
-    this.productService.save();
+    this.productService.saveCartId();
+    this.cartArray();
   }
 
+
   addToCart(product) {
-    let item = {
-      name: product.name,
-      category: product.category,
-      price: product.price,
-      quantity: 1
+    console.log(this.Newcart);
+    if (this.Newcart.mobile == "") {
+      console.log("ok working");
+      this.cartArray();
+      this.alerts.push({
+        type: 'danger',
+        msg: "Ops !! Somthing went wrong Please try Again",
+        timeout: 2000
+      });
+    } else {
+      console.log(this.Newcart);
+      let item = {
+        name: product.name,
+        category: product.category,
+        price: product.price,
+        quantity: 1
+      }
+      let index = this.Newcart.cart.products.findIndex(c => c.name === product.name)
+      if (index === -1) {
+        this.Newcart.cart.products.push(item);
+        this.addNewItemsToDb(item);
+      } else {
+        this.addExcistingItemsToDb(this.Newcart.cart.products);
+      }
+
     }
-    this.productService.addProdToCart(item).subscribe(res => {
-      console.log(res);
+  }
+
+  cartArray() {
+    this.productService.getCartProducts().subscribe(cart => {
+      if (cart[0]) {
+        this.Newcart = cart[0];
+      } else {
+      }
     }, err => {
       console.log(err);
-
     });
+  }
 
+
+  addExcistingItemsToDb(item) {
+    console.log(item);
+    this.alerts.push({
+      type: 'warning',
+      msg: "Item Already In the Shopping Cart",
+      timeout: 2000
+    });
+  }
+
+  addNewItemsToDb(item) {
+    this.productService.addProdToCart(item).subscribe(res => {
+      console.log(res);
+      this.alerts.push({
+        type: 'success',
+        msg: "Item Added to the Shopping Cart",
+        timeout: 2000
+      });
+    }, err => {
+      console.log(err);
+    })
   }
 
   loadProducts() {
@@ -51,7 +112,7 @@ export class OnlineOrdersComponent implements OnInit {
       });
   }
 
-  createOrGetCart() {
+  GetCart() {
 
   }
 
