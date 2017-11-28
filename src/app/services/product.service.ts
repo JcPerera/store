@@ -7,7 +7,10 @@ import 'rxjs/add/operator/map';
 export class ProductService {
   user = {};
   cartId;
-  constructor(private http: Http, private auth: AuthUserService) { }
+  constructor(private http: Http, private auth: AuthUserService) {
+    this.cartId = this.auth.loadCartId();
+    this.user = JSON.parse(this.auth.loadUser());
+   }
 
   getProducts() {
     let headers = new Headers();
@@ -16,23 +19,13 @@ export class ProductService {
       .map(res => res.json());
   }
 
-  getCartId() {
-    this.user = JSON.parse(this.auth.loadUser());
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.put('http://localhost:8080/cart', this.user, { headers: headers })
-      .map(res => res.json());
-  }
-
   getCartProducts() {
-    this.user = JSON.parse(this.auth.loadUser());
     let headers = new Headers();
     return this.http.get('http://localhost:8080/cart/' + this.cartId, { headers: headers })
       .map(res => res.json());
   }
 
   addProdToCart(item) {
-    this.user = JSON.parse(this.auth.loadUser());
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put('http://localhost:8080/cart/' + this.cartId, item, { headers: headers })
@@ -40,27 +33,15 @@ export class ProductService {
   }
 
   UpdateFullCart(item) {
-    this.user = JSON.parse(this.auth.loadUser());
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/cart/' + this.cartId, item, { headers: headers })
       .map(res => res.json());
   }
 
-  saveCartId() {
-    this.getCartId().subscribe(data => {
-      if (data) {
-        this.storeCart(data._id);
-      }
-    }, err => {
-      console.log(err);
-    })
-  }
+  
 
-  storeCart(cartId) {
-    localStorage.setItem('cart_id', cartId);
-    this.cartId = cartId;
-  }
+  
 
   
 

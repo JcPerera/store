@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.add(data.msg);
         this.authService.storeUserData(data.token, data.user);
+        this.authService.saveCartId();
         this.router.navigate(['/']);
       } else {
         this.add(data.msg);

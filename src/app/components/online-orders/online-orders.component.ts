@@ -14,57 +14,43 @@ export class OnlineOrdersComponent implements OnInit {
   category: any;
   products = [];
   filteredProducts = [];
+
   Newcart = {
-    mobile:"",
-    username:"",
+    mobile: "",
+    username: "",
     cart: {
       products: [{
         name: ""
       }]
     }
-
   }
+
   alerts = [];
   constructor(
     private route: ActivatedRoute,
     private auth: AuthUserService,
     private productService: ProductService) {
     this.loadProducts();
-    this.productService.saveCartId();
-    this.cartArray();
+    this.AddcartToArray();
   }
 
-
   addToCart(product) {
-    console.log(this.Newcart);
-    if (this.Newcart.mobile == "") {
-      console.log("ok working");
-      this.cartArray();
-      this.alerts.push({
-        type: 'danger',
-        msg: "Ops !! Somthing went wrong Please try Again",
-        timeout: 2000
-      });
+    let item = {
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      quantity: 1
+    }
+    let index = this.Newcart.cart.products.findIndex(c => c.name === product.name)
+    if (index === -1) {
+      this.Newcart.cart.products.push(item);
+      this.addNewItemsToDb(item);
     } else {
-      console.log(this.Newcart);
-      let item = {
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        quantity: 1
-      }
-      let index = this.Newcart.cart.products.findIndex(c => c.name === product.name)
-      if (index === -1) {
-        this.Newcart.cart.products.push(item);
-        this.addNewItemsToDb(item);
-      } else {
-        this.addExcistingItemsToDb(this.Newcart.cart.products);
-      }
-
+      this.addExcistingItemsToDb(this.Newcart.cart.products);
     }
   }
 
-  cartArray() {
+  AddcartToArray() {
     this.productService.getCartProducts().subscribe(cart => {
       if (cart[0]) {
         this.Newcart = cart[0];
@@ -88,6 +74,7 @@ export class OnlineOrdersComponent implements OnInit {
   addNewItemsToDb(item) {
     this.productService.addProdToCart(item).subscribe(res => {
       console.log(res);
+      console.log(this.Newcart.cart.products)
       this.alerts.push({
         type: 'success',
         msg: "Item Added to the Shopping Cart",
@@ -110,10 +97,6 @@ export class OnlineOrdersComponent implements OnInit {
           this.products.filter(p => p.category === this.category) :
           this.products;
       });
-  }
-
-  GetCart() {
-
   }
 
   ngOnInit() {

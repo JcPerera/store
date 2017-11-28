@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 export class AuthUserService {
   authToken: any;
   user: any;
+  cartId: any;
 
   constructor(private http: Http) { }
 
@@ -50,6 +51,11 @@ export class AuthUserService {
     return user;
   }
 
+  loadCartId(){
+    const cartid = localStorage.getItem('cart_id');
+    return cartid;
+  }
+
   loggedIn() {
     return tokenNotExpired('id_token');
   }
@@ -58,5 +64,27 @@ export class AuthUserService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  getCartId() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:8080/cart', this.user, { headers: headers })
+      .map(res => res.json());
+  }
+
+  saveCartId() {
+    this.getCartId().subscribe(data => {
+      if (data) {
+        this.storeCart(data._id);
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  storeCart(cartId) {
+    localStorage.setItem('cart_id', cartId);
+    this.cartId = cartId;
   }
 }

@@ -7,14 +7,27 @@ import { ProductService } from "../../services/product.service";
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
- 
-  constructor(private proServices: ProductService) { }
+
+ cart=[];
+
+  constructor(private productService: ProductService) {
+    this.AddcartToArray();
+   }
 
   ngOnInit() {
-    
-  
-    
   }
-  
+
+  AddcartToArray() {
+    this.productService.getCartProducts().subscribe(cart => {
+      if (cart[0]) {
+        this.cart=cart[0].cart.products;
+        console.log(this.cart);
+      } else {
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+
 
 }
