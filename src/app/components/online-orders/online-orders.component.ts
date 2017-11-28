@@ -17,11 +17,25 @@ export class OnlineOrdersComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthUserService,
     private productService: ProductService) {
-      this.loadProducts();
-      this.productService.save();
+    this.loadProducts();
+    this.productService.save();
   }
 
-  addToCart() { }
+  addToCart(product) {
+    let item = {
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      quantity: 1
+    }
+    this.productService.addProdToCart(item).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+
+    });
+
+  }
 
   loadProducts() {
     this.productService.getProducts().switchMap(products => {
@@ -37,8 +51,8 @@ export class OnlineOrdersComponent implements OnInit {
       });
   }
 
-  createOrGetCart(){
-    
+  createOrGetCart() {
+
   }
 
   ngOnInit() {

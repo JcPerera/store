@@ -18,25 +18,32 @@ export class ProductService {
 
   gerCart() {
     this.user = JSON.parse(this.auth.loadUser());
-      let headers = new Headers();
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put('http://localhost:8080/cart', this.user, { headers: headers })
       .map(res => res.json());
   }
 
-  save(){
-    this.gerCart().subscribe(data=>{
-      if(data){
-        console.log(data)
-      this.storeCart(data._id);
+  addProdToCart(item) {
+    this.user = JSON.parse(this.auth.loadUser());
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:8080/cart/'+this.cartId, item, { headers: headers })
+      .map(res => res.json());
+  }
+
+  save() {
+    this.gerCart().subscribe(data => {
+      if (data) {
+        this.storeCart(data._id);
       }
-    },err=>{
+    }, err => {
       console.log(err);
     })
   }
 
-  storeCart(cartId){
+  storeCart(cartId) {
     localStorage.setItem('cart_id', cartId);
-    this.cartId =cartId;
+    this.cartId = cartId;
   }
 }
