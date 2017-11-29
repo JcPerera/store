@@ -24,6 +24,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
 import { SlideShowComponent } from './components/slide-show/slide-show.component';
 import { ReservationService } from "./services/reservation.service";
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 
 
 
@@ -41,6 +42,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     InformationComponent,
     ProfileComponent,
     ShoppingCartComponent,
+    ShippingFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +78,11 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
       {
         path: 'online-orders',
         component: OnlineOrdersComponent,
+        canActivate: [AuthguardsService]
+      },
+      {
+        path: 'shopping-cart/shipping',
+        component: ShippingFormComponent,
         canActivate: [AuthguardsService]
       },
       {
