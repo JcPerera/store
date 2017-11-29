@@ -32,13 +32,19 @@ export class ProductService {
       .map(res => res.json());
   }
 
-  UpdateFullCart(item) {
+  updateItemQuantity(item) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/cart/' + this.cartId, item, { headers: headers })
+    return this.http.put('http://localhost:8080/cart/update/' + this.cartId, item, { headers: headers })
       .map(res => res.json());
   }
 
+  removeItem(item){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:8080/cart/remove/' + this.cartId, item, { headers: headers })
+      .map(res => res.json());
+  }
   
 
   

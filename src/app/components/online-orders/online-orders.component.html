@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div *ngFor="let alert of alerts">
+      <div class="sticky-top" *ngFor="let alert of alerts">
         <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
       </div>
       <div class="row">
