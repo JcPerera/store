@@ -11,6 +11,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { AuthUserService } from "./services/auth-user.service";
 import { AuthguardsService } from "./services/authguards.service";
 import { ProductService } from "./services/product.service";
+import { OrderService } from "./services/order.service";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -96,7 +97,8 @@ import { ShippingFormComponent } from './components/shipping-form/shipping-form.
     AuthUserService, 
     AuthguardsService, 
     ProductService,
-    ReservationService
+    ReservationService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })
